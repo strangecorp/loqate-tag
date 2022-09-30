@@ -1,5 +1,5 @@
 {
-    "name": "loqate/tag",
+    "name": "strangecorp/loqate-tag",
     "description": "Address Validation for Checkout Forms",
     "repositories": {
     "magento": {
