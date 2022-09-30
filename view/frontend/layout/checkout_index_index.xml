@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="head.additional">
+            <block class="Loqate\Tag\Block\Main" name="loqate.tag.script_default" template="Loqate_Tag::default.phtml" />
+            <block class="Loqate\Tag\Block\Main" name="loqate.tag.script_checkout" template="Loqate_Tag::checkout_index_index.phtml" />
+        </referenceBlock>
+    </body>
+</page>

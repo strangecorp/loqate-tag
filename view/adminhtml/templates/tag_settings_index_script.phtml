@@ -1,0 +1,239 @@
+<?php
+/**
+ * @var $block \Magento\Backend\Block\Template
+ */
+
+$pcaSettings = $block->getSettingsHelper();
+$pcaAccCode = $pcaSettings->getAccountCode();
+$pcaToken = $pcaSettings->getAccountToken();
+$pcaCustomJSFront = $pcaSettings->getCustomJavaScriptFront();
+$pcaCustomJSBack = $pcaSettings->getCustomJavaScriptBack();
+$moduleVersion = $pcaSettings->getModuleVersion();
+?>
+
+<div class="loqate-container">
+
+    <div class="loqate-message-container">
+        <div class="loqate-message">
+            
+        </div>
+    </div>
+
+    <?php if ($pcaAccCode): ?>
+
+        <div class="secure-container" style="display: block;">        
+            <form id="formSettings" onsubmit="return false;">
+                <fieldset>
+                    <!-- logo -->
+                    <div class="row" style="text-align: center; margin-top: 40px;">
+                        <div class="pca-logo"></div>
+                    </div>
+
+                    <div class="separator"></div>
+                    
+                    <!-- Account code label -->
+                    <div class="row rowset" style="font-size: 16px;">
+                    
+                        <div class="col-xs-3">
+                            <label><b>Account Code</b></label>
+                        </div>
+                        <div class="col-xs-3">
+                            <label><?= strtoupper(/* @noEscape */ $pcaAccCode); ?></label>
+                        </div>
+
+                        <!-- Hidden token for debug -->
+                        <label id="auth_token_field" style="display: none;"><?= /* @noEscape */ $pcaToken; ?></label>
+                    </div>
+
+                    <!-- Javascript to put on front-end -->
+                    <div class="row rowset">
+                        <div class="col-xs-12">
+                            <label class="customjs-label">Front-end custom JavaScript</label>
+                            <textarea name="customjavascript_front" id="customjavascript_front">
+                                <?= /* @noEscape */ $pcaCustomJSFront; ?>
+                            </textarea>
+                            <comment>
+                                Paste any custom JavaScript code that you have in here.
+                                This will execute on the store site the customer sees.
+                            </comment>
+                        </div>
+                    </div>
+
+                    <!-- Javascript to put on back-end -->
+                    <div class="row rowset">
+                        <div class="col-xs-12">
+                            <label class="customjs-label">Back-end custom JavaScript</label>
+                            <textarea name="customjavascript_back"
+                                      id="customjavascript_back">
+                                <?= /* @noEscape */ $pcaCustomJSBack; ?>
+                            </textarea>
+                            <comment>
+                                Paste any custom JavaScript code that you have in here.
+                                This will execute on the admin area of the site.
+                            </comment>
+                        </div>
+                    </div>
+
+                    <div class="row rowset">
+                        <!-- Save button -->
+                        <div class="col-xs-3">
+                            <button class="button-light"
+                                    id="btnSave"
+                                    type="submit"
+                                    form="formSettings"
+                                    value="Save">
+                                Save Changes
+                            </button>
+                        </div>
+
+                        <!-- Link to account section -->
+                        <div class="col-xs-9">
+                            <button style="float:right;"
+                                    class="button-dark"
+                                    onclick="window.open('https://account.pcapredict.com', '_blank')"
+                                    id="btnAccount"
+                                    type="button"
+                                    value="ViewMyAccount">
+                                View my account
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <form id="formLogOut" onsubmit="return false;">
+                <fieldset>
+                    <div class="separator"></div>
+
+                    <!-- Logout button -->
+                    <div class="row rowset" style="margin-bottom: 20px;">
+                        <div class="col-xs-3">
+                            <button class="button-light"
+                                    id="btnLogOut"
+                                    type="submit"
+                                    form="formLogOut"
+                                    value="Log Out">
+                                Log out
+                            </button>
+                        </div>
+                        <div class="col-xs-8">
+                            <comment>
+                                Logging out will stop Loqate from working in your site.
+                                You can log back in at any time.
+                            </comment>
+                            <br />
+                            <comment>
+                                Make sure to
+                                <a href="javascript://Save as TXT" id="customCodeBackup">backup</a>
+                                your custom code first!
+                            </comment>
+                        </div>
+                    </div>
+
+                    <div style="float: right; margin-right: -40px; font-size: 10px;">
+                        <?= /* @noEscape */ $moduleVersion; ?>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <?php else: ?>
+
+        <div class="secure-container" style="display: block;">
+            
+            <form id="formLogIn" onsubmit="return false;">
+                <fieldset>
+                    <!-- logo -->
+                    <div class="row" style="text-align: center; margin-top: 40px;">
+                        <div class="pca-logo"></div>
+                    </div>
+
+                    <div class="separator"></div>
+                    
+                    <!-- Account code label -->
+                    <div class="row rowset" style="font-size: 14px;">
+                        <p>You need a Loqate account in order to use this extension.</p>
+                        <p>
+                            If you don't have a Loqate account, you can
+                            <a class="external-link" href="https://www.pcapredict.com/Register/"
+                               target="_blank">
+                                register for free
+                            </a>.
+                        </p>
+                    </div>
+
+                    <div class="row rowset">
+                        <div class="col-xs-3">
+                            <label>Account Code</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <input type="text"
+                                   name="accountCode"
+                                   id="accountCode"
+                                   placeholder="Account Code"
+                                   data-cip-id="accountCode">
+                        </div>
+                        <div class="col-xs-4">             
+                            <comment></comment>
+                        </div>
+                    </div>
+
+                    <div class="row rowset">
+                        <div class="col-xs-3">
+                            <label>Password</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <input type="password"
+                                   name="password"
+                                   id="password"
+                                   placeholder="Password"
+                                   data-cip-id="password">
+                            <a class="external-link"
+                               href="https://account.pcapredict.com/security/forgot/"
+                               target="_blank">
+                                Forgotten your password?
+                            </a>
+                        </div>
+                        <div class="col-xs-4">             
+                            <comment></comment>
+                        </div>                    
+                    </div>
+
+                    <div class="row rowset">
+                        <div class="col-xs-3">
+                            <button class="button-dark"
+                                    id="btnLogIn"
+                                    type="submit"
+                                    form="formLogIn"
+                                    value="Log in">
+                                Log in
+                            </button>
+                        </div>                    
+                    </div>
+                    <!-- Version of the app in the display. -->
+                    <div style="margin-top: 25px;" class="secure-container-footer">
+                        <div style="float: right; margin-right: -40px; font-size: 10px;">
+                            <?= /* @noEscape */ $moduleVersion; ?>
+                        </div>
+                    </div>           
+                </fieldset>
+            </form>
+        </div>
+
+    <?php endif; ?>
+
+    <script type="text/x-magento-init">
+            {
+                "*": {
+                    "Loqate_Tag/js/pca-tag-settings": {
+                        "pcaAccCode": "<?= /* @noEscape */ $pcaAccCode; ?>",
+                        "pcaToken": "<?= /* @noEscape */ $pcaToken; ?>",
+                        "moduleVersion": "<?= /* @noEscape */ $moduleVersion; ?>",
+                        "formSettingsUrl": "<?= /* @noEscape */ $block->getUrl('tag/settings'); ?>",
+                        "formLogInUrl": "<?= /* @noEscape */ $block->getUrl('tag/login'); ?>",
+                        "formLogOut": "<?= /* @noEscape */ $block->getUrl('tag/logout'); ?>"
+                    }
+                }
+            }
+    </script>
+</div>

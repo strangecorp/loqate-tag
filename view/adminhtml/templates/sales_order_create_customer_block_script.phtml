@@ -1,0 +1,23 @@
+<?php
+    $pcaSettings = $block->getSettingsHelper();
+    $pcaAccCode = $pcaSettings->getAccountCode();
+    $pcaCustomJSBack = $pcaSettings->getCustomJavaScriptBack();
+?>
+
+<?php if ($pcaAccCode): ?>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Loqate_Tag/js/pca-sale": {
+                "pcaAccCode": "<?= /* @noEscape */ $pcaAccCode; ?>"
+            }
+        }
+    }
+</script>
+
+<script>
+    <?php if (/* @noEscape */ $pcaCustomJSBack) { echo $pcaCustomJSBack;} ?>
+</script>
+
+<?php endif; ?>

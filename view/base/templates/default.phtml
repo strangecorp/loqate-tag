@@ -1,0 +1,31 @@
+<?php
+/**
+ * @var $block Loqate\Tag\Block\Main
+ */
+?>
+<?php
+    // Find all .xml layout files that reference this.
+    // Currently it's the front end all over (default.phtml) and the backend on the sales_order_address.phtml.
+
+    $pcaSettings = $block->getSettingsHelper();
+    $pcaAccCode = $pcaSettings->getAccountCode();
+    $pcaCustomJSFront = $pcaSettings->getCustomJavaScriptFront();
+?>
+
+<?php if ($pcaAccCode): ?>
+
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Loqate_Tag/js/pca-default": {
+                    "pcaAccCode": "<?= /* @noEscape */ $pcaAccCode; ?>"
+                }
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        <?php if (/* @noEscape */ $pcaCustomJSFront) { echo $pcaCustomJSFront;} ?>
+    </script>
+
+<?php endif; ?>
