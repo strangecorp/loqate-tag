@@ -1,3 +1,9 @@
+## **Disclaimer**
+Previous development has ceased on this module and as a result it would no longer support a composer installation under PHP 8.1. The previous developers have suggested that anecdotally it has been working for other customers under PHP 8.1, presumably using non-composer based deploys.
+
+This clone of that project simply enables composer installs under 8.1. We have made no further changes and cannot be responsible for errors that may occur under 8.1. We are in the same boat as you.
+
+
 # **Manual Install**
 
 ### From Git
